@@ -12,9 +12,9 @@ public class main {
 		Scanner leitor = new Scanner(System.in);
 		ArrayList<Funcionario> list_Funcionario=new ArrayList<Funcionario>();
 		N_Funcionario n_Funcionario=new N_Funcionario();
-		list_Funcionario.add(new Comissionado("pedro", "travessa", 0, true, 0, 1000, (float) 0.2));
+		list_Funcionario.add(new Comissionado("pedro", "travessa", 0, false, 0, 1000, (float) 0.2));
 		list_Funcionario.add(new Assalariado("rafael", "santo", 1, false, 1, 2000));
-		list_Funcionario.add(new Horista("joao","antonio", 2, true, 2, 15));
+		list_Funcionario.add(new Horista("joao","antonio", 2, false, 2, 15));
 		
 		do
 		{
@@ -50,22 +50,34 @@ public class main {
 				else
 					System.out.println("O funcionario nao foi encontrado!!\nErro!");
 				break;
+				
 			case 3:
 				for(Funcionario obj_funcionario : list_Funcionario)
 				{
 					System.out.println(obj_funcionario.toString());
 				}
+				break;
 			case 4:
 				System.out.print("Digite a matricula do funcionario que deseja atualiza:");
 				int atualizaMatricula=leitor.nextInt();
 				Funcionario atualizaFuncionario=n_Funcionario.procuraFuncionario(list_Funcionario, atualizaMatricula);
-				Funcionario novo_Funcionario=n_Funcionario.alterarFuncionario(atualizaFuncionario);
-				if(novo_Funcionario!=null)
+				if(atualizaFuncionario!=null)
 				{
-					list_Funcionario.add(novo_Funcionario);
-					list_Funcionario.remove(atualizaFuncionario);
+					Funcionario novo_Funcionario=n_Funcionario.alterarFuncionario(list_Funcionario, atualizaFuncionario);
+					if(novo_Funcionario!=null)
+					{
+						list_Funcionario.add(novo_Funcionario);
+						list_Funcionario.remove(atualizaFuncionario);
+					}
+					else
+						System.out.println("O funcionario nao foi encontrado!!\nErro!");
 				}
+				else
+					System.out.println("O funcionario nao foi encontrado!!\nErro!");
 			case 5:
+			
+			default:
+				
 			}
 		}while(true);
 

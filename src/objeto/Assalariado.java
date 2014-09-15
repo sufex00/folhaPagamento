@@ -11,7 +11,7 @@ public class Assalariado extends Funcionario
 		this.salario=salario;
 	}
 	public Assalariado(String nome, String enderenco, int matricula,
-			boolean sindicato, int tipo_pagamento, float salario_assalariado,
+			boolean sindicato, int tipo_pagamento, float salario,
 			Sindicato obj_sindicato) {
 		// TODO Auto-generated constructor stub
 		super(nome, enderenco, matricula, sindicato, tipo_pagamento, obj_sindicato);

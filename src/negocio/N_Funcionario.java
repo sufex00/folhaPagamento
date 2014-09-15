@@ -120,7 +120,7 @@ public class N_Funcionario {
 		{
 			for(i=0 ; i<list_Funcionario.size() ; i++)
 			{
-				if(list_Funcionario.get(i).getObj_sindicato().getMatricula_sindicato()==matricula)
+				if(list_Funcionario.get(i).isSindicato() && list_Funcionario.get(i).getObj_sindicato().getMatricula_sindicato()==matricula)
 				{
 					matricula++;
 					i=0;
@@ -129,8 +129,9 @@ public class N_Funcionario {
 		}while(existeMatricula);
 		return matricula;
 	}
-	public Funcionario alterarFuncionario(Funcionario obj_funcionario)
+	public Funcionario alterarFuncionario(ArrayList<Funcionario> list_Funcionario, Funcionario obj_funcionario)
 	{
+		Sindicato obj_sindicato=null;
 		Scanner leitor = new Scanner(System.in);
 		System.out.println("Escolha qual opcao deseja alterar:");
 		System.out.println("[1]-Nome");
@@ -140,16 +141,19 @@ public class N_Funcionario {
 		System.out.println("[5]-Identificacao do Sindicato");
 		System.out.println("[6]-Taxa Sindical");
 		System.out.println("[7]-Tipo de Funcionario");
+		System.out.print("Opcao:");
 		int opcao=leitor.nextInt();
 		switch(opcao)
 		{
 			case 1:
 				System.out.print("Digite o novo nome:");
+				leitor.nextLine();
 				String nome=leitor.nextLine();
 				obj_funcionario.setNome(nome);
 				break;
 			case 2:
 				System.out.print("Digite o novo endereco:");
+				leitor.nextLine();
 				String endereco=leitor.nextLine();
 				obj_funcionario.setEnderenco(endereco);
 				break;
@@ -165,13 +169,21 @@ public class N_Funcionario {
 				break;
 			case 4:
 				String sindicato;
+				leitor.nextLine();
 				do
 				{
 					System.out.print("Pertence ao Sindicato(S ou N)?");
 					sindicato=leitor.nextLine();
 				}while(sindicato.compareToIgnoreCase("S") * sindicato.compareToIgnoreCase("N")!=0 );
+				
 				if(sindicato.compareToIgnoreCase("S")==0)
+				{
+					System.out.println("Digite a taxa do sindicato");
+					float taxa=leitor.nextFloat();
+					obj_sindicato= new Sindicato(this.procuraSindicato(list_Funcionario), taxa);
+					obj_funcionario.setObj_sindicato(obj_sindicato);
 					obj_funcionario.setSindicato(true);
+				}
 				else
 					obj_funcionario.setSindicato(false);
 				break;
@@ -194,6 +206,7 @@ public class N_Funcionario {
 					case 1:
 						System.out.println("Digite o salario do funcionario");
 						float salario_assalariado=leitor.nextFloat();
+						System.out.println(salario_assalariado);
 						obj_funcionario=new Assalariado(obj_funcionario.getNome(), obj_funcionario.getEnderenco(),
 							obj_funcionario.getMatricula(), obj_funcionario.isSindicato(), obj_funcionario.getTipo_pagamento(),
 								salario_assalariado, obj_funcionario.getObj_sindicato());
@@ -205,7 +218,7 @@ public class N_Funcionario {
 						float comissao=leitor.nextFloat();
 						obj_funcionario=new Comissionado(obj_funcionario.getNome(), obj_funcionario.getEnderenco()
 							, obj_funcionario.getMatricula(), obj_funcionario.isSindicato(),
-								obj_funcionario.getTipo_pagamento(), salario_comissionado, comissao);
+								obj_funcionario.getTipo_pagamento(), salario_comissionado, comissao, obj_funcionario.getObj_sindicato());
 						break;
 					case 3:
 						System.out.println("Digite o valor da hora do funcionario");
@@ -216,6 +229,6 @@ public class N_Funcionario {
 						break;
 				}
 		}
-		return null;
+		return obj_funcionario;
 	}
 }

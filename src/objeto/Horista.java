@@ -13,7 +13,7 @@ public class Horista extends Funcionario
 	}
 
 	public Horista(String nome, String enderenco, int matricula,
-			boolean sindicato, int tipo_pagamento, float valor_hora,
+			boolean sindicato, int tipo_pagamento, float preco_hora,
 			Sindicato obj_sindicato) {
 		// TODO Auto-generated constructor stub
 		super(nome, enderenco, matricula, sindicato, tipo_pagamento, obj_sindicato);

@@ -29,7 +29,10 @@ public class Funcionario
 		this.matricula = matricula;
 		this.sindicato = sindicato;
 		this.tipo_pagamento = tipo_pagamento;
-		this.obj_sindicato=obj_sindicato;
+		if(this.sindicato)
+			this.obj_sindicato=obj_sindicato;
+		else 
+			this.obj_sindicato=null;
 	}
 	
 	public Sindicato getObj_sindicato() {
@@ -100,7 +103,7 @@ public class Funcionario
 			break;
 		}
 		if(this.sindicato)
-			retorno = retorno + ", sindicato=sim";
+			retorno = retorno + ", sindicato=sim, taxa do sindicato="+this.obj_sindicato.getTaxa()+ ", id="+ this.obj_sindicato.getMatricula_sindicato();
 		else
 			retorno = retorno + ", sindicato=nao";
 		return retorno;
