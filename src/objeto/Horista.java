@@ -12,6 +12,14 @@ public class Horista extends Funcionario
 		this.preco_hora=preco_hora;
 	}
 
+	public Horista(String nome, String enderenco, int matricula,
+			boolean sindicato, int tipo_pagamento, float valor_hora,
+			Sindicato obj_sindicato) {
+		// TODO Auto-generated constructor stub
+		super(nome, enderenco, matricula, sindicato, tipo_pagamento, obj_sindicato);
+		this.preco_hora=preco_hora;
+	}
+
 	public float getPreco_hora() {
 		return preco_hora;
 	}
@@ -21,11 +29,12 @@ public class Horista extends Funcionario
 
 	@Override
 	public String toString() {
-		return "Horista [preco_hora=" + preco_hora + ", nome=" + nome
-				+ ", enderenco=" + enderenco + ", matricula=" + matricula
-				+ ", sindicato=" + sindicato + ", tipo_pagamento="
-				+ tipo_pagamento + "]";
+		return "Horista ["+ super.toString() +", preco_hora=" + preco_hora + "]";
 	}
+	
+	
+
+
 	
 	
 	

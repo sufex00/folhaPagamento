@@ -12,6 +12,9 @@ public class main {
 		Scanner leitor = new Scanner(System.in);
 		ArrayList<Funcionario> list_Funcionario=new ArrayList<Funcionario>();
 		N_Funcionario n_Funcionario=new N_Funcionario();
+		list_Funcionario.add(new Comissionado("pedro", "travessa", 0, true, 0, 1000, (float) 0.2));
+		list_Funcionario.add(new Assalariado("rafael", "santo", 1, false, 1, 2000));
+		list_Funcionario.add(new Horista("joao","antonio", 2, true, 2, 15));
 		
 		do
 		{
@@ -19,6 +22,7 @@ public class main {
 			System.out.println("[1]-Inserir funcionario");
 			System.out.println("[2]-Remover funcionario");
 			System.out.println("[3]-Mostrar Funcionario");
+			System.out.println("[4]-Alterar Dados");
 			System.out.println("[5]-Sair");
 			System.out.print("Opcao:");
 			int menu=leitor.nextInt();
@@ -50,6 +54,16 @@ public class main {
 				for(Funcionario obj_funcionario : list_Funcionario)
 				{
 					System.out.println(obj_funcionario.toString());
+				}
+			case 4:
+				System.out.print("Digite a matricula do funcionario que deseja atualiza:");
+				int atualizaMatricula=leitor.nextInt();
+				Funcionario atualizaFuncionario=n_Funcionario.procuraFuncionario(list_Funcionario, atualizaMatricula);
+				Funcionario novo_Funcionario=n_Funcionario.alterarFuncionario(atualizaFuncionario);
+				if(novo_Funcionario!=null)
+				{
+					list_Funcionario.add(novo_Funcionario);
+					list_Funcionario.remove(atualizaFuncionario);
 				}
 			case 5:
 			}

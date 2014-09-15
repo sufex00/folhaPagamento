@@ -7,6 +7,7 @@ public class Funcionario
 	protected int matricula;
 	protected boolean sindicato;
 	protected int tipo_pagamento;
+	protected Sindicato obj_sindicato;
 	
 	protected static final int cheque_correios = 0;
 	protected static final int cheque_maos     = 1;
@@ -19,6 +20,24 @@ public class Funcionario
 		this.matricula = matricula;
 		this.sindicato = sindicato;
 		this.tipo_pagamento = tipo_pagamento;
+	}
+	
+	public Funcionario(String nome, String enderenco, int matricula,
+			boolean sindicato, int tipo_pagamento, Sindicato obj_sindicato) {
+		this.nome = nome;
+		this.enderenco = enderenco;
+		this.matricula = matricula;
+		this.sindicato = sindicato;
+		this.tipo_pagamento = tipo_pagamento;
+		this.obj_sindicato=obj_sindicato;
+	}
+	
+	public Sindicato getObj_sindicato() {
+		return obj_sindicato;
+	}
+
+	public void setObj_sindicato(Sindicato obj_sindicato) {
+		this.obj_sindicato = obj_sindicato;
 	}
 
 	public String getNome() 
@@ -56,12 +75,35 @@ public class Funcionario
 		this.tipo_pagamento = tipo_pagamento;
 	}
 
+	public String getEnderenco() {
+		return enderenco;
+	}
+
+	public void setEnderenco(String enderenco) {
+		this.enderenco = enderenco;
+	}
+
 	@Override
 	public String toString() {
-		return "Funcionario [nome=" + nome + ", enderenco=" + enderenco
-				+ ", matricula=" + matricula + ", sindicato=" + sindicato
-				+ ", tipo_pagamento=" + tipo_pagamento + ", toString()="
-				+ super.toString() + "]";
+		String retorno = "nome=" + nome + ", enderenco=" + enderenco
+				+ ", matricula=" + matricula ;
+		switch(this.tipo_pagamento)
+		{
+		case 0:
+			retorno = retorno + ", tipo de pagamento= cheque pelos correios";
+			break;
+		case 1:
+			retorno = retorno+", tipo de pagamento= cheque em maos";
+			break;
+		case 2:
+			retorno = retorno + ", tipo de pagamento= deposito";
+			break;
+		}
+		if(this.sindicato)
+			retorno = retorno + ", sindicato=sim";
+		else
+			retorno = retorno + ", sindicato=nao";
+		return retorno;
 	}
 
 }

@@ -14,12 +14,10 @@ public class Comissionado extends Assalariado
 		this.comissao=comissao;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Comissionado [comissao=" + comissao + ", nome=" + nome
-				+ ", enderenco=" + enderenco + ", matricula=" + matricula
-				+ ", sindicato=" + sindicato + ", tipo_pagamento="
-				+ tipo_pagamento + "]";
+		return super.toString().replace("Assalariado [","Comissionado [" ).replace("]", "") +", comissao=" + comissao + "]";
 	}
 	
 	
