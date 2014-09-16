@@ -36,11 +36,57 @@ public class Horista extends Funcionario
 	public String pagamento()
 	{
 		String pagamento;
-		for(Venda obj_venda : this.list_venda)
+		String aux="\n";
+		float salario=0;
+		for(CartaoPonto obj_cartao : this.list_cartao)
 		{
-			obj_venda.getValorVenda();
+			if(obj_cartao.horasTrabalhadas()<=8)
+			{
+				salario+=obj_cartao.horasTrabalhadas()*this.getPreco_hora();
+			}
+
+			else
+			{
+				salario+=8*this.getPreco_hora();
+				salario+=(obj_cartao.horasTrabalhadas()-8)*this.getPreco_hora()*1.5;
+			}
+			aux=aux.concat("\nDia: "+ obj_cartao.getData() + " Hora de inicio-" +
+					obj_cartao.horaInicial.get(obj_cartao.horaInicial.HOUR_OF_DAY)+":"+obj_cartao.horaInicial.get(obj_cartao.horaInicial.MINUTE));
+				aux=aux.concat(" Hora de termino-"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.HOUR_OF_DAY)+":"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.MINUTE)+
+					"("+obj_cartao.horasTrabalhadas()+" horas) Salario:"+((obj_cartao.horasTrabalhadas()-8)*this.getPreco_hora()*1.5+8*this.getPreco_hora()));
 		}
-		return enderenco;
+		if(this.isSindicato())
+		{
+			for(Pagamento obj_pagamento : this.list_pagamento)
+			{
+				salario-=obj_pagamento.getTaxaSindicato();
+			}
+		salario-=this.getObj_sindicato().getTaxa();
+		}
+		pagamento="O funcionario "+this.getNome()+" recebeu de salario "+ salario +" pois:";
+		pagamento=pagamento.concat(aux);
+		if(this.isSindicato())
+		{
+			for(Pagamento obj_pagamento : this.list_pagamento)
+			{
+				pagamento=pagamento.concat("\nTaxas sindicais: -" + obj_pagamento.getTaxaSindicato());
+			}
+			pagamento=pagamento.concat("\nMensalidade sindical: -" + this.getObj_sindicato().getTaxa());
+		}
+		pagamento=pagamento.concat("\nMetodo de pagamento: ");
+		switch(this.getTipo_pagamento())
+		{
+		case 0:
+			pagamento=pagamento.concat("Cheque pelos correios\n");
+			break;
+		case 1:
+			pagamento=pagamento.concat("Cheque em maos\n");
+			break;
+		case 2:
+			pagamento=pagamento.concat("Deposito\n");
+			break;
+		}
+		return pagamento;
 		
 	}
 	

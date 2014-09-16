@@ -51,8 +51,8 @@ public class Comissionado extends Assalariado
 			{
 				salario-=obj_pagamento.getTaxaSindicato();
 			}
-		}
 		salario-=this.getObj_sindicato().getTaxa();
+		}
 		pagamento="O funcionario "+this.getNome()+" recebeu de salario "+ salario +" pois:\n";
 		pagamento=pagamento.concat("Salario fixo: "+this.getSalario());
 		for(Venda obj_venda : this.list_venda)

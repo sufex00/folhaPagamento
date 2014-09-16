@@ -27,6 +27,7 @@ public class Funcionario
 		this.tipo_pagamento = tipo_pagamento;
 		this.list_venda=new ArrayList<Venda>();
 		this.list_pagamento=new ArrayList<Pagamento>();
+		this.list_cartao=new ArrayList<CartaoPonto>();
 	}
 	
 	public Funcionario(String nome, String enderenco, int matricula,
@@ -43,6 +44,7 @@ public class Funcionario
 
 		this.list_venda=new ArrayList<Venda>();
 		this.list_pagamento=new ArrayList<Pagamento>();
+		this.list_cartao=new ArrayList<CartaoPonto>();
 	}
 	
 	public Sindicato getObj_sindicato() {
@@ -135,6 +137,11 @@ public class Funcionario
 	public void addTaxa(Pagamento obj_pagamento)
 	{
 		this.list_pagamento.add(obj_pagamento);
+	}
+	
+	public void addPonto(CartaoPonto obj_cartao)
+	{
+		this.list_cartao.add(obj_cartao);
 	}
 
 

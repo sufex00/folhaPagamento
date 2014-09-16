@@ -14,7 +14,7 @@ public class main {
 		N_Funcionario n_Funcionario=new N_Funcionario();
 		list_Funcionario.add(new Comissionado("pedro", "travessa", 0, false, 0, 1000, (float) 0.2));
 		list_Funcionario.add(new Assalariado("rafael", "santo", 1, false, 1, 2000));
-		list_Funcionario.add(new Horista("joao","antonio", 2, false, 2, 15));
+		list_Funcionario.add(new Horista("joao","antonio", 2, false, 2, 10));
 		
 		do
 		{
@@ -26,6 +26,7 @@ public class main {
 			System.out.println("[5]-Lanca venda");
 			System.out.println("[6]-Contra Cheque");
 			System.out.println("[7]-Cobra taxas sindicais");
+			System.out.println("[8]-Bate ponto");
 			System.out.print("Opcao:");
 			int menu=leitor.nextInt();
 			switch(menu)
@@ -108,6 +109,24 @@ public class main {
 					{
 						list_Funcionario.add(obj_funFuncionarioSindicatonovo);
 						list_Funcionario.remove(obj_funcionarioSindicato);
+					}
+					else
+						System.out.println("O funcionario nao foi encontrado!!\nErro!");
+				}
+				else
+					System.out.println("O funcionario nao foi encontrado!!\nErro!");
+				break;
+			case 8:
+				System.out.println("Digite o id do funcionario:");
+				int ident=leitor.nextInt();
+				Funcionario obj_funcionarioPonto=n_Funcionario.procuraFuncionario(list_Funcionario, ident);
+				if(obj_funcionarioPonto!=null)
+				{
+					Funcionario obj_funcionarioPontoNovo=n_Funcionario.addPonto(obj_funcionarioPonto);
+					if(obj_funcionarioPontoNovo!=null)
+					{
+						list_Funcionario.add(obj_funcionarioPontoNovo);
+						list_Funcionario.remove(obj_funcionarioPonto);
 					}
 					else
 						System.out.println("O funcionario nao foi encontrado!!\nErro!");
