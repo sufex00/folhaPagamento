@@ -10,8 +10,9 @@ public class Funcionario
 	protected boolean sindicato;
 	protected int tipo_pagamento;
 	protected Sindicato obj_sindicato;
-	protected ArrayList<CartaoPonto> list_cartao;
-	protected ArrayList<Venda> list_venda;
+	public ArrayList<CartaoPonto> list_cartao;
+	public ArrayList<Venda> list_venda;
+	public ArrayList<Pagamento> list_pagamento;
 	
 	protected static final int cheque_correios = 0;
 	protected static final int cheque_maos     = 1;
@@ -25,6 +26,7 @@ public class Funcionario
 		this.sindicato = sindicato;
 		this.tipo_pagamento = tipo_pagamento;
 		this.list_venda=new ArrayList<Venda>();
+		this.list_pagamento=new ArrayList<Pagamento>();
 	}
 	
 	public Funcionario(String nome, String enderenco, int matricula,
@@ -40,6 +42,7 @@ public class Funcionario
 			this.obj_sindicato=null;
 
 		this.list_venda=new ArrayList<Venda>();
+		this.list_pagamento=new ArrayList<Pagamento>();
 	}
 	
 	public Sindicato getObj_sindicato() {
@@ -128,5 +131,11 @@ public class Funcionario
 	{
 		return null;
 	}
+	
+	public void addTaxa(Pagamento obj_pagamento)
+	{
+		this.list_pagamento.add(obj_pagamento);
+	}
+
 
 }

@@ -25,6 +25,7 @@ public class main {
 			System.out.println("[4]-Alterar Dados");
 			System.out.println("[5]-Lanca venda");
 			System.out.println("[6]-Contra Cheque");
+			System.out.println("[7]-Cobra taxas sindicais");
 			System.out.print("Opcao:");
 			int menu=leitor.nextInt();
 			switch(menu)
@@ -96,7 +97,24 @@ public class main {
 				Funcionario obj_VendedorPago=n_Funcionario.procuraFuncionario(list_Funcionario, identificador);
 				System.out.println(obj_VendedorPago.pagamento());
 				break;
-			default:
+			case 7:
+				System.out.println("Digite o id do funcionario:");
+				int identificado=leitor.nextInt();
+				Funcionario obj_funcionarioSindicato=n_Funcionario.procuraFuncionario(list_Funcionario, identificado);
+				if(obj_funcionarioSindicato!=null)
+				{
+					Funcionario obj_funFuncionarioSindicatonovo=n_Funcionario.addTaxa(obj_funcionarioSindicato);
+					if(obj_funFuncionarioSindicatonovo!=null)
+					{
+						list_Funcionario.add(obj_funFuncionarioSindicatonovo);
+						list_Funcionario.remove(obj_funcionarioSindicato);
+					}
+					else
+						System.out.println("O funcionario nao foi encontrado!!\nErro!");
+				}
+				else
+					System.out.println("O funcionario nao foi encontrado!!\nErro!");
+				break;
 				
 			}
 		}while(true);

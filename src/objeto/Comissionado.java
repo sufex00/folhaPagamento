@@ -45,12 +45,41 @@ public class Comissionado extends Assalariado
 		{
 			salario+=obj_venda.getValorVenda()*this.comissao;
 		}
+		if(this.isSindicato())
+		{
+			for(Pagamento obj_pagamento : this.list_pagamento)
+			{
+				salario-=obj_pagamento.getTaxaSindicato();
+			}
+		}
+		salario-=this.getObj_sindicato().getTaxa();
 		pagamento="O funcionario "+this.getNome()+" recebeu de salario "+ salario +" pois:\n";
 		pagamento=pagamento.concat("Salario fixo: "+this.getSalario());
 		for(Venda obj_venda : this.list_venda)
 		{
 			pagamento=pagamento.concat("\nVenda: "+obj_venda.getValorVenda() + "   comissao: " 
 		+ obj_venda.getValorVenda()*this.comissao + "(" + this.comissao*100 + "%)");
+		}
+		if(this.isSindicato())
+		{
+			for(Pagamento obj_pagamento : this.list_pagamento)
+			{
+				pagamento=pagamento.concat("\nTaxas sindicais: -" + obj_pagamento.getTaxaSindicato());
+			}
+			pagamento=pagamento.concat("\nMensalidade sindical: -" + this.getObj_sindicato().getTaxa());
+		}
+		pagamento=pagamento.concat("\nMetodo de pagamento: ");
+		switch(this.getTipo_pagamento())
+		{
+		case 0:
+			pagamento=pagamento.concat("Cheque pelos correios");
+			break;
+		case 1:
+			pagamento=pagamento.concat("Cheque em maos");
+			break;
+		case 2:
+			pagamento=pagamento.concat("Deposito");
+			break;
 		}
 		return pagamento;
 		

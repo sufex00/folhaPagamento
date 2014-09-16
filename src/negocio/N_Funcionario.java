@@ -192,7 +192,9 @@ public class N_Funcionario {
 				{
 					System.out.println("Digite a taxa do sindicato:");
 					float taxa=leitor.nextFloat();
+					obj_funcionario.getObj_sindicato().setTaxa(taxa);
 				}
+				break;
 			case 7:
 				System.out.println("Escolha o novo tipo do funcionario:");
 				System.out.println("[1]-Funcionario Assalariado");
@@ -238,6 +240,15 @@ public class N_Funcionario {
 		float venda=leitor.nextFloat();
 		Venda obj_venda=new Venda(venda, obj_Funcionario.getMatricula());
 		obj_Funcionario.addVenda(obj_venda);
+		return obj_Funcionario;
+	}
+	public Funcionario addTaxa(Funcionario obj_Funcionario)
+	{
+		Scanner leitor= new Scanner(System.in);
+		System.out.println("Digite o valor da taxa a ser cobrada:");
+		float taxa=leitor.nextFloat();
+		Pagamento obj_taxa=new Pagamento( obj_Funcionario.getMatricula(), taxa);
+		obj_Funcionario.addTaxa(obj_taxa);
 		return obj_Funcionario;
 	}
 }
