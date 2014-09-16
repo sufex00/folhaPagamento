@@ -12,13 +12,14 @@ public class main {
 		Scanner leitor = new Scanner(System.in);
 		ArrayList<Funcionario> list_Funcionario=new ArrayList<Funcionario>();
 		N_Funcionario n_Funcionario=new N_Funcionario();
+		FolhaPagamento folhaPagamento=new FolhaPagamento(21, 11, 2014);
 		list_Funcionario.add(new Comissionado("pedro", "travessa", 0, false, 0, 1000, (float) 0.2));
 		list_Funcionario.add(new Assalariado("rafael", "santo", 1, false, 1, 2000));
 		list_Funcionario.add(new Horista("joao","antonio", 2, false, 2, 10));
 		
 		do
 		{
-			System.out.println("---Menu-----\n");
+			System.out.println("---Menu-----    Data:"+folhaPagamento.getDate()+"\n");
 			System.out.println("[1]-Inserir funcionario");
 			System.out.println("[2]-Remover funcionario");
 			System.out.println("[3]-Mostrar Funcionario");
@@ -27,6 +28,7 @@ public class main {
 			System.out.println("[6]-Contra Cheque");
 			System.out.println("[7]-Cobra taxas sindicais");
 			System.out.println("[8]-Bate ponto");
+			System.out.println("[9]-Folha de pagamento do dia");
 			System.out.print("Opcao:");
 			int menu=leitor.nextInt();
 			switch(menu)
@@ -84,7 +86,7 @@ public class main {
 				Funcionario obj_VendedorAntigo=n_Funcionario.procuraFuncionario(list_Funcionario, id);
 				if(obj_VendedorAntigo!=null)
 				{
-					Funcionario obj_Vendedor = n_Funcionario.addVenda(obj_VendedorAntigo);
+					Funcionario obj_Vendedor = n_Funcionario.addVenda(obj_VendedorAntigo, folhaPagamento.getDate());
 					if(obj_Vendedor!=null)
 					{
 						list_Funcionario.add(obj_Vendedor);
@@ -122,7 +124,7 @@ public class main {
 				Funcionario obj_funcionarioPonto=n_Funcionario.procuraFuncionario(list_Funcionario, ident);
 				if(obj_funcionarioPonto!=null)
 				{
-					Funcionario obj_funcionarioPontoNovo=n_Funcionario.addPonto(obj_funcionarioPonto);
+					Funcionario obj_funcionarioPontoNovo=n_Funcionario.addPonto(obj_funcionarioPonto, folhaPagamento.getDate());
 					if(obj_funcionarioPontoNovo!=null)
 					{
 						list_Funcionario.add(obj_funcionarioPontoNovo);
@@ -134,6 +136,10 @@ public class main {
 				else
 					System.out.println("O funcionario nao foi encontrado!!\nErro!");
 				break;
+			case 9:
+				System.out.println(folhaPagamento.geraPagamento(list_Funcionario));
+				list_Funcionario=folhaPagamento.baterPonto(list_Funcionario);
+				
 				
 			}
 		}while(true);

@@ -56,13 +56,13 @@ public class Assalariado extends Funcionario
 		switch(this.getTipo_pagamento())
 		{
 		case 0:
-			pagamento=pagamento.concat("Cheque pelos correios");
+			pagamento=pagamento.concat("Cheque pelos correios\n");
 			break;
 		case 1:
-			pagamento=pagamento.concat("Cheque em maos");
+			pagamento=pagamento.concat("Cheque em maos\n");
 			break;
 		case 2:
-			pagamento=pagamento.concat("Deposito");
+			pagamento=pagamento.concat("Deposito\n");
 			break;
 		}
 		return pagamento;

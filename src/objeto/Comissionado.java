@@ -6,12 +6,14 @@ public class Comissionado extends Assalariado
 {
 
 	private float comissao;
+	private boolean pagamento;
 
 	public Comissionado(String nome, String enderenco, int matricula,
 			boolean sindicato, int tipo_pagamento,float salario, float comissao) {
 		super(nome, enderenco, matricula, sindicato, tipo_pagamento, salario);
 		// TODO Auto-generated constructor stub
 		this.comissao=comissao;
+		this.pagamento=true;
 	}
 	
 	public Comissionado(String nome, String enderenco, int matricula,
@@ -19,6 +21,15 @@ public class Comissionado extends Assalariado
 		super(nome, enderenco, matricula, sindicato, tipo_pagamento, salario, obj_sindicato);
 		// TODO Auto-generated constructor stub
 		this.comissao=comissao;
+		this.pagamento=true;
+	}
+	
+	public boolean isPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(boolean pagamento) {
+		this.pagamento = pagamento;
 	}
 
 	public float getComissao() {
@@ -57,7 +68,7 @@ public class Comissionado extends Assalariado
 		pagamento=pagamento.concat("Salario fixo: "+this.getSalario());
 		for(Venda obj_venda : this.list_venda)
 		{
-			pagamento=pagamento.concat("\nVenda: "+obj_venda.getValorVenda() + "   comissao: " 
+			pagamento=pagamento.concat("\nData: "+obj_venda.getData()+"  Venda: "+obj_venda.getValorVenda() + "   comissao: " 
 		+ obj_venda.getValorVenda()*this.comissao + "(" + this.comissao*100 + "%)");
 		}
 		if(this.isSindicato())

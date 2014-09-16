@@ -233,12 +233,12 @@ public class N_Funcionario {
 		}
 		return obj_funcionario;
 	}
-	public Funcionario addVenda(Funcionario obj_Funcionario)
+	public Funcionario addVenda(Funcionario obj_Funcionario, String data)
 	{
 		Scanner leitor= new Scanner(System.in);
 		System.out.println("Digite o valor da venda:");
 		float venda=leitor.nextFloat();
-		Venda obj_venda=new Venda(venda, obj_Funcionario.getMatricula());
+		Venda obj_venda=new Venda(venda, obj_Funcionario.getMatricula(), data);
 		obj_Funcionario.addVenda(obj_venda);
 		return obj_Funcionario;
 	}
@@ -251,11 +251,9 @@ public class N_Funcionario {
 		obj_Funcionario.addTaxa(obj_taxa);
 		return obj_Funcionario;
 	}
-	public Funcionario addPonto(Funcionario obj_funcionario)
+	public Funcionario addPonto(Funcionario obj_funcionario, String data)
 	{
 		Scanner leitor= new Scanner(System.in);
-		System.out.println("Digite a data do ponto(DD/MM/AA):");
-		String data=leitor.nextLine();
 		System.out.println("Digite a hora inicial do ponto:");
 		int horaInicial=leitor.nextInt();
 		System.out.println("Digite a minuto inicial do ponto:");

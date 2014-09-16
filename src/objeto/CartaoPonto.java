@@ -8,7 +8,7 @@ public class CartaoPonto
 {
 	private Date data;
 	private SimpleDateFormat format;
-	GregorianCalendar gegorianCal;
+	public GregorianCalendar gegorianCal;
 	public GregorianCalendar horaInicial;
 	public GregorianCalendar horaFinal;
 	

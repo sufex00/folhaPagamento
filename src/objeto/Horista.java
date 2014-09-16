@@ -43,17 +43,22 @@ public class Horista extends Funcionario
 			if(obj_cartao.horasTrabalhadas()<=8)
 			{
 				salario+=obj_cartao.horasTrabalhadas()*this.getPreco_hora();
+				aux=aux.concat("\nDia: "+ obj_cartao.getData() + " Hora de inicio-" +
+						obj_cartao.horaInicial.get(obj_cartao.horaInicial.HOUR_OF_DAY)+":"+obj_cartao.horaInicial.get(obj_cartao.horaInicial.MINUTE));
+					aux=aux.concat(" Hora de termino-"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.HOUR_OF_DAY)+":"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.MINUTE)+
+						"("+obj_cartao.horasTrabalhadas()+" horas) Salario:"+((obj_cartao.horasTrabalhadas())*this.getPreco_hora()));
 			}
 
 			else
 			{
 				salario+=8*this.getPreco_hora();
 				salario+=(obj_cartao.horasTrabalhadas()-8)*this.getPreco_hora()*1.5;
+				aux=aux.concat("\nDia: "+ obj_cartao.getData() + " Hora de inicio-" +
+						obj_cartao.horaInicial.get(obj_cartao.horaInicial.HOUR_OF_DAY)+":"+obj_cartao.horaInicial.get(obj_cartao.horaInicial.MINUTE));
+					aux=aux.concat(" Hora de termino-"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.HOUR_OF_DAY)+":"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.MINUTE)+
+						"("+obj_cartao.horasTrabalhadas()+" horas) Salario:"+((obj_cartao.horasTrabalhadas()-8)*this.getPreco_hora()*1.5+8*this.getPreco_hora()));
 			}
-			aux=aux.concat("\nDia: "+ obj_cartao.getData() + " Hora de inicio-" +
-					obj_cartao.horaInicial.get(obj_cartao.horaInicial.HOUR_OF_DAY)+":"+obj_cartao.horaInicial.get(obj_cartao.horaInicial.MINUTE));
-				aux=aux.concat(" Hora de termino-"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.HOUR_OF_DAY)+":"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.MINUTE)+
-					"("+obj_cartao.horasTrabalhadas()+" horas) Salario:"+((obj_cartao.horasTrabalhadas()-8)*this.getPreco_hora()*1.5+8*this.getPreco_hora()));
+			
 		}
 		if(this.isSindicato())
 		{

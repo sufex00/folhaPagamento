@@ -1,9 +1,15 @@
 package objeto;
 
+import java.util.GregorianCalendar;
+
 public class Venda {
+
+	public String data;
 	private float valorVenda;
 	private int idFuncionario;
-	public Venda(float valorVenda, int idFuncionario) {
+	public Venda(float valorVenda, int idFuncionario, String data) {
+		
+		this.data=data;
 		this.valorVenda = valorVenda;
 		this.idFuncionario = idFuncionario;
 	}
@@ -18,6 +24,12 @@ public class Venda {
 	}
 	public void setIdFuncionario(int idFuncionario) {
 		this.idFuncionario = idFuncionario;
+	}
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
 	}
 	
 
