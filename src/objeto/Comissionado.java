@@ -36,6 +36,24 @@ public class Comissionado extends Assalariado
 		return super.toString().replace("Assalariado [","Comissionado [" ).replace("]", "") +", comissao=" + comissao + "]";
 	}
 	
-	
+	@Override
+	public String pagamento()
+	{
+		String pagamento;
+		float salario=this.getSalario();
+		for(Venda obj_venda : this.list_venda)
+		{
+			salario+=obj_venda.getValorVenda()*this.comissao;
+		}
+		pagamento="O funcionario "+this.getNome()+" recebeu de salario "+ salario +" pois:\n";
+		pagamento=pagamento.concat("Salario fixo: "+this.getSalario());
+		for(Venda obj_venda : this.list_venda)
+		{
+			pagamento=pagamento.concat("\nVenda: "+obj_venda.getValorVenda() + "   comissao: " 
+		+ obj_venda.getValorVenda()*this.comissao + "(" + this.comissao*100 + "%)");
+		}
+		return pagamento;
+		
+	}
 
 }

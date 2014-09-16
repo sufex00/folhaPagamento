@@ -29,6 +29,13 @@ public class Assalariado extends Funcionario
 	public String toString() {
 		return "Assalariado [" + super.toString() +  ", salario=" + salario + "]";
 	}
+	
+	@Override
+	public String pagamento()
+	{
+		return "O funcionario " + this.getNome()+" recebeu de salario "+this.getSalario()+".";
+		
+	}
 
 	
 	

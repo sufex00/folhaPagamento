@@ -231,4 +231,13 @@ public class N_Funcionario {
 		}
 		return obj_funcionario;
 	}
+	public Funcionario addVenda(Funcionario obj_Funcionario)
+	{
+		Scanner leitor= new Scanner(System.in);
+		System.out.println("Digite o valor da venda:");
+		float venda=leitor.nextFloat();
+		Venda obj_venda=new Venda(venda, obj_Funcionario.getMatricula());
+		obj_Funcionario.addVenda(obj_venda);
+		return obj_Funcionario;
+	}
 }

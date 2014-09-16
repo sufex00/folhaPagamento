@@ -32,6 +32,18 @@ public class Horista extends Funcionario
 		return "Horista ["+ super.toString() +", preco_hora=" + preco_hora + "]";
 	}
 	
+	@Override
+	public String pagamento()
+	{
+		String pagamento;
+		for(Venda obj_venda : this.list_venda)
+		{
+			obj_venda.getValorVenda();
+		}
+		return enderenco;
+		
+	}
+	
 	
 
 

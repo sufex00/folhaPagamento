@@ -1,5 +1,7 @@
 package objeto;
 
+import java.util.ArrayList;
+
 public class Funcionario 
 {
 	protected String nome;
@@ -8,6 +10,8 @@ public class Funcionario
 	protected boolean sindicato;
 	protected int tipo_pagamento;
 	protected Sindicato obj_sindicato;
+	protected ArrayList<CartaoPonto> list_cartao;
+	protected ArrayList<Venda> list_venda;
 	
 	protected static final int cheque_correios = 0;
 	protected static final int cheque_maos     = 1;
@@ -20,6 +24,7 @@ public class Funcionario
 		this.matricula = matricula;
 		this.sindicato = sindicato;
 		this.tipo_pagamento = tipo_pagamento;
+		this.list_venda=new ArrayList<Venda>();
 	}
 	
 	public Funcionario(String nome, String enderenco, int matricula,
@@ -33,6 +38,8 @@ public class Funcionario
 			this.obj_sindicato=obj_sindicato;
 		else 
 			this.obj_sindicato=null;
+
+		this.list_venda=new ArrayList<Venda>();
 	}
 	
 	public Sindicato getObj_sindicato() {
@@ -107,6 +114,19 @@ public class Funcionario
 		else
 			retorno = retorno + ", sindicato=nao";
 		return retorno;
+	}
+	public void addVenda(Venda obj_venda)
+	{
+		this.list_venda.add(obj_venda);
+	}
+	public void limpaVendas()
+	{
+		this.list_venda.clear();
+	}
+	
+	public String pagamento()
+	{
+		return null;
 	}
 
 }

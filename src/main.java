@@ -23,7 +23,8 @@ public class main {
 			System.out.println("[2]-Remover funcionario");
 			System.out.println("[3]-Mostrar Funcionario");
 			System.out.println("[4]-Alterar Dados");
-			System.out.println("[5]-Sair");
+			System.out.println("[5]-Lanca venda");
+			System.out.println("[6]-Contra Cheque");
 			System.out.print("Opcao:");
 			int menu=leitor.nextInt();
 			switch(menu)
@@ -74,8 +75,27 @@ public class main {
 				}
 				else
 					System.out.println("O funcionario nao foi encontrado!!\nErro!");
+				break;
 			case 5:
-			
+				System.out.println("Digite o id do funcionario:");
+				int id=leitor.nextInt();
+				Funcionario obj_VendedorAntigo=n_Funcionario.procuraFuncionario(list_Funcionario, id);
+				if(obj_VendedorAntigo!=null)
+				{
+					Funcionario obj_Vendedor = n_Funcionario.addVenda(obj_VendedorAntigo);
+					if(obj_Vendedor!=null)
+					{
+						list_Funcionario.add(obj_Vendedor);
+						list_Funcionario.remove(obj_VendedorAntigo);
+					}
+				}
+				break;
+			case 6:
+				System.out.println("Digite o id do funcionario:");
+				int identificador=leitor.nextInt();
+				Funcionario obj_VendedorPago=n_Funcionario.procuraFuncionario(list_Funcionario, identificador);
+				System.out.println(obj_VendedorPago.pagamento());
+				break;
 			default:
 				
 			}
