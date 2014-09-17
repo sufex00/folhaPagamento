@@ -36,11 +36,14 @@ public class main {
 			int menu=leitor.nextInt();
 			switch(menu)
 			{
-			case 1:/*
-				ArrayList<Funcionario> lista_funcionario=new ArrayList<Funcionario>();
-				lista_funcionario.addAll(list_Funcionario);
-				undo.add(lista_funcionario);*/
+			case 1:
 				Funcionario novo_funcionario= n_Funcionario.addFuncionario(list_Funcionario);
+				if( novo_funcionario instanceof Assalariado)
+					undo.add(new Assalariado( novo_funcionario));
+				if( novo_funcionario instanceof Horista)
+					undo.add(new Horista( novo_funcionario));
+				if( novo_funcionario instanceof Comissionado && !(novo_funcionario instanceof Assalariado))
+					undo.add(new Comissionado( novo_funcionario));
 				if(novo_funcionario!=null)
 				{
 					list_Funcionario.add(novo_funcionario);
@@ -49,13 +52,16 @@ public class main {
 				else
 					System.out.println("O funcionario nao pode ser cadastrado!!\nErro!");
 				break;
-			case 2:/*
-				ArrayList<Funcionario> lista_funcionario2=new ArrayList<Funcionario>();
-				lista_funcionario2.addAll(list_Funcionario);
-				undo.add(lista_funcionario2);*/
+			case 2:
 				System.out.print("Digite a matricula do funcionario que deseja apaga:");
 				int matricula=leitor.nextInt();
 				Funcionario antigo_funcionario=n_Funcionario.procuraFuncionario(list_Funcionario, matricula);
+				if( antigo_funcionario instanceof Assalariado)
+					undo.add(new Assalariado(antigo_funcionario));
+				if( antigo_funcionario instanceof Horista)
+					undo.add(new Horista(antigo_funcionario));
+				if( antigo_funcionario instanceof Comissionado && !(antigo_funcionario instanceof Assalariado))
+					undo.add(new Comissionado(antigo_funcionario));
 				if(antigo_funcionario!=null)
 				{
 					list_Funcionario.remove(antigo_funcionario);
@@ -79,7 +85,7 @@ public class main {
 					undo.add(new Assalariado(atualizaFuncionario));
 				if(atualizaFuncionario instanceof Horista)
 					undo.add(new Horista(atualizaFuncionario));
-				if(atualizaFuncionario instanceof Comissionado)
+				if(atualizaFuncionario instanceof Comissionado && !(atualizaFuncionario instanceof Assalariado))
 					undo.add(new Comissionado(atualizaFuncionario));
 				if(atualizaFuncionario!=null)
 				{
@@ -96,13 +102,16 @@ public class main {
 					System.out.println("O funcionario nao foi encontrado!!\nErro!");
 				System.out.println(undo.get(0).getNome());
 				break;
-			case 5:/*
-				ArrayList<Funcionario> lista_funcionario4=new ArrayList<Funcionario>();
-				lista_funcionario4.addAll(list_Funcionario);
-				undo.add(lista_funcionario4);*/
+			case 5:
 				System.out.println("Digite o id do funcionario:");
 				int id=leitor.nextInt();
 				Funcionario obj_VendedorAntigo=n_Funcionario.procuraFuncionario(list_Funcionario, id);
+				if( obj_VendedorAntigo instanceof Assalariado)
+					undo.add(new Assalariado( obj_VendedorAntigo));
+				if( obj_VendedorAntigo instanceof Horista)
+					undo.add(new Horista( obj_VendedorAntigo));
+				if( obj_VendedorAntigo instanceof Comissionado && !(obj_VendedorAntigo instanceof Assalariado))
+					undo.add(new Comissionado( obj_VendedorAntigo));
 				if(obj_VendedorAntigo!=null)
 				{
 					Funcionario obj_Vendedor = n_Funcionario.addVenda(obj_VendedorAntigo, folhaPagamento.getDate());
@@ -113,22 +122,22 @@ public class main {
 					}
 				}
 				break;
-			case 6:/*
-				ArrayList<Funcionario> lista_funcionario5=new ArrayList<Funcionario>();
-				lista_funcionario5.addAll(list_Funcionario);
-				undo.add(lista_funcionario5);*/
+			case 6:
 				System.out.println("Digite o id do funcionario:");
 				int identificador=leitor.nextInt();
 				Funcionario obj_VendedorPago=n_Funcionario.procuraFuncionario(list_Funcionario, identificador);
 				System.out.println(obj_VendedorPago.pagamento());
 				break;
-			case 7:/*
-				ArrayList<Funcionario> lista_funcionario6=new ArrayList<Funcionario>();
-				lista_funcionario6.addAll(list_Funcionario);
-				undo.add(lista_funcionario6);*/
+			case 7:
 				System.out.println("Digite o id do funcionario:");
 				int identificado=leitor.nextInt();
 				Funcionario obj_funcionarioSindicato=n_Funcionario.procuraFuncionario(list_Funcionario, identificado);
+				if( obj_funcionarioSindicato instanceof Assalariado)
+					undo.add(new Assalariado( obj_funcionarioSindicato));
+				if( obj_funcionarioSindicato instanceof Horista)
+					undo.add(new Horista( obj_funcionarioSindicato));
+				if( obj_funcionarioSindicato instanceof Comissionado && !(obj_funcionarioSindicato instanceof Assalariado))
+					undo.add(new Comissionado( obj_funcionarioSindicato));
 				if(obj_funcionarioSindicato!=null)
 				{
 					Funcionario obj_funFuncionarioSindicatonovo=n_Funcionario.addTaxa(obj_funcionarioSindicato);
@@ -143,13 +152,16 @@ public class main {
 				else
 					System.out.println("O funcionario nao foi encontrado!!\nErro!");
 				break;
-			case 8:/*
-				ArrayList<Funcionario> lista_funcionario7=new ArrayList<Funcionario>();
-				lista_funcionario7.addAll(list_Funcionario);
-				undo.add(lista_funcionario7);*/
+			case 8:
 				System.out.println("Digite o id do funcionario:");
 				int ident=leitor.nextInt();
 				Funcionario obj_funcionarioPonto=n_Funcionario.procuraFuncionario(list_Funcionario, ident);
+				if( obj_funcionarioPonto instanceof Assalariado)
+					undo.add(new Assalariado( obj_funcionarioPonto));
+				if( obj_funcionarioPonto instanceof Horista)
+					undo.add(new Horista( obj_funcionarioPonto));
+				if( obj_funcionarioPonto instanceof Comissionado && !(obj_funcionarioPonto instanceof Assalariado))
+					undo.add(new Comissionado( obj_funcionarioPonto));
 				if(obj_funcionarioPonto!=null)
 				{
 					Funcionario obj_funcionarioPontoNovo=n_Funcionario.addPonto(obj_funcionarioPonto, folhaPagamento.getDate());
@@ -164,22 +176,38 @@ public class main {
 				else
 					System.out.println("O funcionario nao foi encontrado!!\nErro!");
 				break;
-			case 9:/*
-				ArrayList<Funcionario> lista_funcionario8=new ArrayList<Funcionario>();
-				lista_funcionario8.addAll(list_Funcionario);
-				undo.add(lista_funcionario8);*/
+			case 9:
 				System.out.println(folhaPagamento.geraPagamento(list_Funcionario));
 				list_Funcionario=folhaPagamento.baterPonto(list_Funcionario);
 				break;		
 			case 10:
-				list_Funcionario.remove(n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()));
-				list_Funcionario.add(undo.get(undo.size()-1));
-				redo.add( n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()));
-				
+				Funcionario undo_funcionario = null;
+				if( n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()) instanceof Assalariado)
+					undo_funcionario=new Assalariado(n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()));
+				if( n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()) instanceof Horista)
+					undo_funcionario=new Horista(n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()));
+				if( n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()) instanceof Comissionado && !(n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()) instanceof Assalariado))
+					undo_funcionario=new Comissionado(n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()));
+				list_Funcionario.remove(n_Funcionario.procuraFuncionario(list_Funcionario, undo.get(undo.size()-1).getMatricula()));	
+				if(undo_funcionario==null || !undo_funcionario.igual(undo.get(undo.size()-1)))
+					list_Funcionario.add(undo.get(undo.size()-1));
+				redo.add(undo_funcionario);
+				undo.remove(undo.get(undo.size()-1));
 				break;
 			case 11:
+				Funcionario redo_funcionario=null;
+				if( n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()) instanceof Assalariado)
+					redo_funcionario=new Assalariado(n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()));
+				if( n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()) instanceof Horista)
+					redo_funcionario=new Horista(n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()));
+				if( n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()) instanceof Comissionado && !( n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()) instanceof Assalariado))
+					redo_funcionario=new Comissionado(n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()));
+				list_Funcionario.remove(n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()));
+				if(redo_funcionario==null || !redo_funcionario.igual(redo.get(redo.size()-1)))
+					list_Funcionario.add(redo.get(redo.size()-1));
+				undo.add(n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()));
+				redo.remove(redo.get(redo.size()-1));
 				break;
-				
 			}
 		}while(true);
 

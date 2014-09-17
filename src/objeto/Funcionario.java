@@ -25,9 +25,13 @@ public class Funcionario
 		this.matricula = obj_funcionario.getMatricula();
 		this.sindicato = obj_funcionario.isSindicato();
 		this.tipo_pagamento = obj_funcionario.getTipo_pagamento();
-		this.list_venda=obj_funcionario.list_venda;
-		this.list_pagamento=obj_funcionario.list_pagamento;
-		this.list_cartao=obj_funcionario.list_cartao;
+		this.list_venda=new ArrayList<Venda>(obj_funcionario.list_venda);
+		this.list_pagamento=new ArrayList<Pagamento>(obj_funcionario.list_pagamento);
+		this.list_cartao=new ArrayList<CartaoPonto>(obj_funcionario.list_cartao);
+		if(this.sindicato)
+			this.obj_sindicato=obj_funcionario.getObj_sindicato();
+		else 
+			this.obj_sindicato=null;
 	}
 	public Funcionario(String nome, String enderenco, int matricula,
 			boolean sindicato, int tipo_pagamento) {
@@ -39,6 +43,10 @@ public class Funcionario
 		this.list_venda=new ArrayList<Venda>();
 		this.list_pagamento=new ArrayList<Pagamento>();
 		this.list_cartao=new ArrayList<CartaoPonto>();
+		if(this.sindicato)
+			this.obj_sindicato=obj_sindicato;
+		else 
+			this.obj_sindicato=null;
 	}
 	
 	public Funcionario(String nome, String enderenco, int matricula,
@@ -108,7 +116,17 @@ public class Funcionario
 	public void setEnderenco(String enderenco) {
 		this.enderenco = enderenco;
 	}
-
+	public boolean igual(Funcionario obj_funcionario)
+	{
+		boolean retorno=false;
+		if(this.nome==obj_funcionario.getNome())
+			if(this.enderenco==obj_funcionario.getEnderenco())
+				if(this.matricula==obj_funcionario.getMatricula())
+					if(this.sindicato==obj_funcionario.isSindicato())
+						if(this.tipo_pagamento==obj_funcionario.getTipo_pagamento())
+							retorno=true;
+		return retorno;
+	}
 	@Override
 	public String toString() {
 		String retorno = "nome=" + nome + ", enderenco=" + enderenco

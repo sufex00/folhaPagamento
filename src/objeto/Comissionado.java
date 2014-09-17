@@ -47,11 +47,24 @@ public class Comissionado extends Assalariado
 		this.comissao = comissao;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return super.toString().replace("Assalariado [","Comissionado [" ).replace("]", "") +", comissao=" + comissao + "]";
+	}
+	
+	@Override
+	public boolean igual(Funcionario obj_funcionario) 
+	{
+		boolean retorno=false;
+		retorno=super.igual(obj_funcionario);
+		if(retorno)
+		{
+			if(((Comissionado)obj_funcionario).getComissao()==this.comissao)
+				retorno=true;
+			else
+				retorno=false;
+		}
+		return retorno;
 	}
 	
 	@Override

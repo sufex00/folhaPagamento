@@ -37,6 +37,21 @@ public class Assalariado extends Funcionario
 	}
 	
 	@Override
+	public boolean igual(Funcionario obj_funcionario) 
+	{
+		boolean retorno=false;
+		retorno=super.igual(obj_funcionario);
+		if(retorno)
+		{
+			if(((Assalariado)obj_funcionario).getSalario()==this.salario)
+				retorno=true;
+			else
+				retorno=false;
+		}
+		return retorno;
+	}
+	
+	@Override
 	public String pagamento()
 	{
 		float salario=this.getSalario();

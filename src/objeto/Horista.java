@@ -39,6 +39,21 @@ public class Horista extends Funcionario
 	}
 	
 	@Override
+	public boolean igual(Funcionario obj_funcionario) 
+	{
+		boolean retorno=false;
+		retorno=super.igual(obj_funcionario);
+		if(retorno)
+		{
+			if(((Horista)obj_funcionario).getPreco_hora()==this.preco_hora)
+				retorno=true;
+			else
+				retorno=false;
+		}
+		return retorno;
+	}
+	
+	@Override
 	public String pagamento()
 	{
 		String pagamento;
