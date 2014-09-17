@@ -124,7 +124,10 @@ public class Funcionario
 				if(this.matricula==obj_funcionario.getMatricula())
 					if(this.sindicato==obj_funcionario.isSindicato())
 						if(this.tipo_pagamento==obj_funcionario.getTipo_pagamento())
-							retorno=true;
+							if(this.list_cartao==obj_funcionario.list_cartao)
+								if(this.list_pagamento==obj_funcionario.list_pagamento)
+									if(this.list_venda==obj_funcionario.list_venda)
+										retorno=true;
 		return retorno;
 	}
 	@Override
