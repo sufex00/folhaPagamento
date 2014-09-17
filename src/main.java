@@ -20,6 +20,7 @@ public class main {
 		ArrayList<Funcionario> redo = new ArrayList<Funcionario>();
 		int menu=0;
 		boolean aux = false;
+		boolean aux2 = false;
 		do
 		{
 			System.out.println("---Menu-----    Data:"+folhaPagamento.getDate()+"\n");
@@ -51,6 +52,7 @@ public class main {
 					list_Funcionario.add(novo_funcionario);
 					System.out.println("Funcionario cadastrado com sucesso!");
 					aux=true;
+					aux2=false;
 				}
 				else
 					System.out.println("O funcionario nao pode ser cadastrado!!\nErro!");
@@ -70,6 +72,7 @@ public class main {
 					list_Funcionario.remove(antigo_funcionario);
 					System.out.println("Funcionario apagado com sucesso!");
 					aux=false;
+					aux2=true;
 				}
 				else
 					System.out.println("O funcionario nao foi encontrado!!\nErro!");
@@ -100,6 +103,7 @@ public class main {
 						list_Funcionario.add(novo_Funcionario);
 						list_Funcionario.remove(atualizaFuncionario);
 						aux=false;
+						aux2=false;
 					}
 					else
 						System.out.println("O funcionario nao foi encontrado!!\nErro!");
@@ -126,6 +130,7 @@ public class main {
 						list_Funcionario.add(obj_Vendedor);
 						list_Funcionario.remove(obj_VendedorAntigo);
 						aux=false;
+						aux2=false;
 					}
 				}
 				break;
@@ -153,6 +158,7 @@ public class main {
 						list_Funcionario.add(obj_funFuncionarioSindicatonovo);
 						list_Funcionario.remove(obj_funcionarioSindicato);
 						aux=false;
+						aux2=false;
 					}
 					else
 						System.out.println("O funcionario nao foi encontrado!!\nErro!");
@@ -178,6 +184,7 @@ public class main {
 						list_Funcionario.add(obj_funcionarioPontoNovo);
 						list_Funcionario.remove(obj_funcionarioPonto);
 						aux=false;
+						aux2=false;
 					}
 					else
 						System.out.println("O funcionario nao foi encontrado!!\nErro!");
@@ -215,7 +222,7 @@ public class main {
 					redo_funcionario=new Comissionado(n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()));
 				list_Funcionario.remove(n_Funcionario.procuraFuncionario(list_Funcionario, redo.get(redo.size()-1).getMatricula()));
 				if(redo_funcionario==null || !redo_funcionario.igual(redo.get(redo.size()-1)))
-					list_Funcionario.add(redo.get(redo.size()-1));
+					if(!aux2)list_Funcionario.add(redo.get(redo.size()-1));
 				if(redo_funcionario==null)
 					redo_funcionario=redo.get(redo.size()-1);
 				undo.add(redo_funcionario);
