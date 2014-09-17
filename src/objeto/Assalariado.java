@@ -4,6 +4,12 @@ public class Assalariado extends Funcionario
 {
 
 	private float salario;
+	public Assalariado(Funcionario obj_funcionarios)
+	{
+		super(obj_funcionarios);
+		this.salario=((Assalariado) obj_funcionarios).getSalario();
+	}
+	
 	public Assalariado(String nome, String enderenco, int matricula,
 			boolean sindicato, int tipo_pagamento, float salario) {
 		super(nome, enderenco, matricula, sindicato, tipo_pagamento);

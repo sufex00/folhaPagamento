@@ -18,6 +18,17 @@ public class Funcionario
 	protected static final int cheque_maos     = 1;
 	protected static final int deposito        = 2;
 	
+	public Funcionario(Funcionario obj_funcionario)
+	{
+		this.nome = obj_funcionario.getNome();
+		this.enderenco = obj_funcionario.getEnderenco();
+		this.matricula = obj_funcionario.getMatricula();
+		this.sindicato = obj_funcionario.isSindicato();
+		this.tipo_pagamento = obj_funcionario.getTipo_pagamento();
+		this.list_venda=obj_funcionario.list_venda;
+		this.list_pagamento=obj_funcionario.list_pagamento;
+		this.list_cartao=obj_funcionario.list_cartao;
+	}
 	public Funcionario(String nome, String enderenco, int matricula,
 			boolean sindicato, int tipo_pagamento) {
 		this.nome = nome;

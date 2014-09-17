@@ -11,7 +11,7 @@ public class FolhaPagamento {
 	
 	private Date data;
 	private SimpleDateFormat format;
-	private GregorianCalendar gegorianCal;
+	public GregorianCalendar gegorianCal;
 	
 	public FolhaPagamento(int dia, int mes, int ano)
 	{

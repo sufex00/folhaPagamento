@@ -8,6 +8,13 @@ public class Comissionado extends Assalariado
 	private float comissao;
 	private boolean pagamento;
 
+	public Comissionado(Funcionario obj_comissionado)
+	{
+		super(obj_comissionado);
+		this.comissao=((Comissionado)obj_comissionado).getComissao();
+		this.pagamento=((Comissionado)obj_comissionado).isPagamento();
+	}
+	
 	public Comissionado(String nome, String enderenco, int matricula,
 			boolean sindicato, int tipo_pagamento,float salario, float comissao) {
 		super(nome, enderenco, matricula, sindicato, tipo_pagamento, salario);

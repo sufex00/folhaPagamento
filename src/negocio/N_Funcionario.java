@@ -267,4 +267,5 @@ public class N_Funcionario {
 		obj_funcionario.addPonto(obj_cartao);
 		return obj_funcionario;
 	}
+
 }

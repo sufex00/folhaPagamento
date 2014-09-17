@@ -5,6 +5,12 @@ public class Horista extends Funcionario
 
 	private float preco_hora;
 	
+	public Horista(Funcionario obj_horista)
+	{
+		super(obj_horista);
+		this.preco_hora= ((Horista) obj_horista).getPreco_hora();
+	}
+	
 	public Horista(String nome, String enderenco, int matricula,
 			boolean sindicato, int tipo_pagamento, float preco_hora) {
 		super(nome, enderenco, matricula, sindicato, tipo_pagamento);
@@ -45,7 +51,7 @@ public class Horista extends Funcionario
 				salario+=obj_cartao.horasTrabalhadas()*this.getPreco_hora();
 				aux=aux.concat("\nDia: "+ obj_cartao.getData() + " Hora de inicio-" +
 						obj_cartao.horaInicial.get(obj_cartao.horaInicial.HOUR_OF_DAY)+":"+obj_cartao.horaInicial.get(obj_cartao.horaInicial.MINUTE));
-					aux=aux.concat(" Hora de termino-"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.HOUR_OF_DAY)+":"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.MINUTE)+
+				aux=aux.concat(" Hora de termino-"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.HOUR_OF_DAY)+":"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.MINUTE)+
 						"("+obj_cartao.horasTrabalhadas()+" horas) Salario:"+((obj_cartao.horasTrabalhadas())*this.getPreco_hora()));
 			}
 
@@ -55,10 +61,9 @@ public class Horista extends Funcionario
 				salario+=(obj_cartao.horasTrabalhadas()-8)*this.getPreco_hora()*1.5;
 				aux=aux.concat("\nDia: "+ obj_cartao.getData() + " Hora de inicio-" +
 						obj_cartao.horaInicial.get(obj_cartao.horaInicial.HOUR_OF_DAY)+":"+obj_cartao.horaInicial.get(obj_cartao.horaInicial.MINUTE));
-					aux=aux.concat(" Hora de termino-"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.HOUR_OF_DAY)+":"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.MINUTE)+
+				aux=aux.concat(" Hora de termino-"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.HOUR_OF_DAY)+":"+obj_cartao.horaFinal.get(obj_cartao.horaFinal.MINUTE)+
 						"("+obj_cartao.horasTrabalhadas()+" horas) Salario:"+((obj_cartao.horasTrabalhadas()-8)*this.getPreco_hora()*1.5+8*this.getPreco_hora()));
 			}
-			
 		}
 		if(this.isSindicato())
 		{
@@ -92,7 +97,6 @@ public class Horista extends Funcionario
 			break;
 		}
 		return pagamento;
-		
 	}
 	
 	
