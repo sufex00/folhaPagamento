@@ -22,6 +22,7 @@ public class main {
 		int menu=0;
 		boolean aux = false;
 		boolean aux2 = false;
+		boolean isContinue=true;
 		do
 		{
 			System.out.println("---Menu-----    Data:"+folhaPagamento.getDate()+"\n");
@@ -36,6 +37,7 @@ public class main {
 			System.out.println("[9]-Folha de pagamento do dia");
 			System.out.println("[10]-Refazer operacao");
 			System.out.println("[11]-Fazer operacao");
+			System.out.println("[12]-Sair");
 			System.out.print("Opcao:");
 			try{
 				menu=leitor.nextInt();
@@ -269,8 +271,11 @@ public class main {
 					System.out.println("Erro!!\nNao se pode realiza a acao!");
 				}
 				break;
+			case 12:
+				isContinue=false;
+				break;
 			}
-		}while(true);
+		}while(isContinue);
 
 	}
 
