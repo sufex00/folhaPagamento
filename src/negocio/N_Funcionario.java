@@ -7,83 +7,84 @@ import java.util.Scanner;
 
 public class N_Funcionario {
 
+	@SuppressWarnings("finally")
 	public Funcionario addFuncionario(ArrayList<Funcionario> list_Funcionario)
-	{	
+	  throws Exception{	
 		Funcionario new_funcionario = null;
-		Sindicato obj_sindicato=null;
-		Scanner leitor = new Scanner(System.in);
-		System.out.println("---Menu---");
-		System.out.print("Nome:");
-		String nome=leitor.nextLine();
-		System.out.print("Endereco:");
-		String endereco=leitor.nextLine();
-		String sindicato;
-		do{
-			System.out.print("Pertence ao Sindicato(S ou N)?");
-			sindicato=leitor.nextLine();
-		}while(sindicato.compareToIgnoreCase("S") * sindicato.compareToIgnoreCase("N")!=0 );
-		boolean isSindicato;
-		if(sindicato.compareToIgnoreCase("S")==0)
-		{
-			isSindicato=true;
-			System.out.println("Digite a taxa do sindicato");
-			float taxa=leitor.nextFloat();
-			obj_sindicato= new Sindicato(this.procuraSindicato(list_Funcionario), taxa);
-		}
-		else
-			isSindicato=false;
-		System.out.println("Tipo:");
-		System.out.println("[1]-Funcionario Assalariado");
-		System.out.println("[2]-Funcionario Comissionado");
-		System.out.println("[3]-Funcionario Horista");
-		System.out.println("[0]-Sair");
-		System.out.print("Opcao:");
-		int tipo=leitor.nextInt();
-		int pagamento=0;
-		if (tipo!=0)
-		{
-			System.out.println("Tipo de pagamento:");
-			System.out.println("[1]-Cheque Correios");
-			System.out.println("[2]-Cheque em Maos");
-			System.out.println("[3]-Deposito");
+		
+			Sindicato obj_sindicato=null;
+			Scanner leitor = new Scanner(System.in);
+			System.out.println("---Menu---");
+			System.out.print("Nome:");
+			String nome=leitor.nextLine();
+			System.out.print("Endereco:");
+			String endereco=leitor.nextLine();
+			String sindicato;
+			do{
+				System.out.print("Pertence ao Sindicato(S ou N)?");
+				sindicato=leitor.nextLine();
+			}while(sindicato.compareToIgnoreCase("S") * sindicato.compareToIgnoreCase("N")!=0 );
+			boolean isSindicato;
+			if(sindicato.compareToIgnoreCase("S")==0)
+			{
+				isSindicato=true;
+				System.out.println("Digite a taxa do sindicato");
+				float taxa=leitor.nextFloat();
+				obj_sindicato= new Sindicato(this.procuraSindicato(list_Funcionario), taxa);
+			}
+			else
+				isSindicato=false;
+			System.out.println("Tipo:");
+			System.out.println("[1]-Funcionario Assalariado");
+			System.out.println("[2]-Funcionario Comissionado");
+			System.out.println("[3]-Funcionario Horista");
 			System.out.println("[0]-Sair");
 			System.out.print("Opcao:");
-			pagamento=leitor.nextInt();
-		}
-		if(nome.isEmpty() || endereco.isEmpty() || tipo==0 || pagamento==0)
-			new_funcionario=null;
-		else
-		{
-			switch(tipo)
+			int tipo=leitor.nextInt();
+			int pagamento=0;
+			if (tipo!=0)
 			{
-			case 1:
-				System.out.println("Digite o Salarios fixo do Funcionario:");
-				float salario_assalariado=leitor.nextFloat();
-				new_funcionario=new Assalariado(nome,endereco,this.procuraMatricula(list_Funcionario),isSindicato,pagamento-1,salario_assalariado);
-				if(isSindicato)
-					new_funcionario.setObj_sindicato(obj_sindicato);
-				break;
-			case 2:
-				System.out.println("Digite o Salario fixo do Funcionario:");
-				float salario_comissionado=leitor.nextFloat();
-				System.out.println("Digite o valor da comissao do Funcionario:");
-				float comissao=leitor.nextFloat();
-				new_funcionario=new Comissionado(nome,endereco,this.procuraMatricula(list_Funcionario),isSindicato,pagamento-1,salario_comissionado, comissao);
-				if(isSindicato)
-					new_funcionario.setObj_sindicato(obj_sindicato);
-				break;
-			case 3:
-				System.out.println("Digite o preco da hora do Funcionario:");
-				float salario_horista=leitor.nextFloat();
-				new_funcionario=new Horista(nome,endereco,this.procuraMatricula(list_Funcionario),isSindicato, pagamento-1,salario_horista);
-				if(isSindicato)
-					new_funcionario.setObj_sindicato(obj_sindicato);
-				break;
+				System.out.println("Tipo de pagamento:");
+				System.out.println("[1]-Cheque Correios");
+				System.out.println("[2]-Cheque em Maos");
+				System.out.println("[3]-Deposito");
+				System.out.println("[0]-Sair");
+				System.out.print("Opcao:");
+				pagamento=leitor.nextInt();
 			}
+			if(nome.isEmpty() || endereco.isEmpty() || tipo==0 || pagamento==0)
+				new_funcionario=null;
+			else
+			{
+				switch(tipo)
+				{
+				case 1:
+					System.out.println("Digite o Salarios fixo do Funcionario:");
+					float salario_assalariado=leitor.nextFloat();
+					new_funcionario=new Assalariado(nome,endereco,this.procuraMatricula(list_Funcionario),isSindicato,pagamento-1,salario_assalariado);
+					if(isSindicato)
+						new_funcionario.setObj_sindicato(obj_sindicato);
+					break;
+				case 2:
+					System.out.println("Digite o Salario fixo do Funcionario:");
+					float salario_comissionado=leitor.nextFloat();
+					System.out.println("Digite o valor da comissao do Funcionario:");
+					float comissao=leitor.nextFloat();
+					new_funcionario=new Comissionado(nome,endereco,this.procuraMatricula(list_Funcionario),isSindicato,pagamento-1,salario_comissionado, comissao);
+					if(isSindicato)
+						new_funcionario.setObj_sindicato(obj_sindicato);
+					break;
+				case 3:
+					System.out.println("Digite o preco da hora do Funcionario:");
+					float salario_horista=leitor.nextFloat();
+					new_funcionario=new Horista(nome,endereco,this.procuraMatricula(list_Funcionario),isSindicato, pagamento-1,salario_horista);
+					if(isSindicato)
+						new_funcionario.setObj_sindicato(obj_sindicato);
+					break;
+				}
+			}
+			return new_funcionario;
 		}
-		return new_funcionario;
-
-	}
 	public Funcionario procuraFuncionario(ArrayList<Funcionario> list_Funcionario, int matricula)
 	{
 		Funcionario retorno=null;
@@ -130,7 +131,7 @@ public class N_Funcionario {
 		return matricula;
 	}
 	public Funcionario alterarFuncionario(ArrayList<Funcionario> list_Funcionario, Funcionario obj_funcionario)
-	{
+	  throws Exception{
 		Sindicato obj_sindicato=null;
 		Scanner leitor = new Scanner(System.in);
 		Funcionario atualizaFuncionario2 = null;
@@ -241,7 +242,7 @@ public class N_Funcionario {
 		return atualizaFuncionario2;
 	}
 	public Funcionario addVenda(Funcionario obj_Funcionario, String data)
-	{
+	  throws Exception{
 		Funcionario obj_retorno=null;
 		if( obj_Funcionario instanceof Assalariado && !(obj_Funcionario instanceof Comissionado))
 			obj_retorno = new Assalariado(obj_Funcionario);
@@ -257,7 +258,7 @@ public class N_Funcionario {
 		return obj_retorno;
 	}
 	public Funcionario addTaxa(Funcionario obj_Funcionario)
-	{
+	  throws Exception{
 		Funcionario obj_retorno=null;
 		if( obj_Funcionario instanceof Assalariado && !(obj_Funcionario instanceof Comissionado))
 			obj_retorno = new Assalariado(obj_Funcionario);
@@ -273,7 +274,7 @@ public class N_Funcionario {
 		return obj_retorno;
 	}
 	public Funcionario addPonto(Funcionario obj_funcionario, String data)
-	{
+	  throws Exception{
 		Funcionario obj_retorno=null;
 		if( obj_funcionario instanceof Assalariado && !(obj_funcionario instanceof Comissionado))
 			obj_retorno = new Assalariado(obj_funcionario);

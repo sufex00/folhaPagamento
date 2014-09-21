@@ -37,17 +37,26 @@ public class main {
 			System.out.println("[10]-Refazer operacao");
 			System.out.println("[11]-Fazer operacao");
 			System.out.print("Opcao:");
-			menu=leitor.nextInt();
+			try{
+				menu=leitor.nextInt();
+			}catch (Exception e)
+			{
+				System.out.println("Digite novamente!!\nErro!!");
+				leitor.next();
+			}
 			switch(menu)
 			{
 			case 1:
-				Funcionario novo_funcionario= n_Funcionario.addFuncionario(list_Funcionario);
-/*				if( novo_funcionario instanceof Assalariado && !(novo_funcionario instanceof Comissionado))
-					undo.add(new Assalariado( novo_funcionario));
-				if( novo_funcionario instanceof Horista)
-					undo.add(new Horista( novo_funcionario));
-				if( novo_funcionario instanceof Comissionado )
-					undo.add(new Comissionado( novo_funcionario));*/
+				Funcionario novo_funcionario = null;
+				try
+				{
+					novo_funcionario= n_Funcionario.addFuncionario(list_Funcionario);
+				}catch (Exception e) {
+					// TODO: handle exception
+					System.out.println("Erro!");
+					novo_funcionario = null;
+					menu=0;
+				}
 				if(novo_funcionario!=null)
 				{
 					undo.push(new ArrayList<Funcionario>(list_Funcionario));
@@ -57,18 +66,22 @@ public class main {
 					aux2=false;
 				}
 				else
-					System.out.println("O funcionario nao pode ser cadastrado!!\nErro!");
+					System.out.println("O funcionario nao pode ser cadastrado!!!");
 				break;
 			case 2:
 				System.out.print("Digite a matricula do funcionario que deseja apaga:");
-				int matricula=leitor.nextInt();
-				Funcionario antigo_funcionario=n_Funcionario.procuraFuncionario(list_Funcionario, matricula);
-/*				if( antigo_funcionario instanceof Assalariado && !(antigo_funcionario instanceof Comissionado))
-					undo.add(new Assalariado(antigo_funcionario));
-				if( antigo_funcionario instanceof Horista)
-					undo.add(new Horista(antigo_funcionario));
-				if( antigo_funcionario instanceof Comissionado )
-					undo.add(new Comissionado(antigo_funcionario));*/
+				int matricula=-1;
+				Funcionario antigo_funcionario=null;
+				try
+				{
+					matricula=leitor.nextInt();
+					antigo_funcionario=n_Funcionario.procuraFuncionario(list_Funcionario, matricula);
+				}catch (Exception e)
+				{
+					System.out.println("Erro!!");
+					antigo_funcionario=null;
+					menu=0;
+				}
 				if(antigo_funcionario!=null)
 				{
 					undo.push(new ArrayList<Funcionario>(list_Funcionario));
@@ -78,7 +91,7 @@ public class main {
 					aux2=true;
 				}
 				else
-					System.out.println("O funcionario nao foi encontrado!!\nErro!");
+					System.out.println("O funcionario nao foi encontrado!!!");
 				break;
 				
 			case 3:
@@ -90,12 +103,29 @@ public class main {
 				break;
 			case 4:
 				System.out.print("Digite a matricula do funcionario que deseja atualiza:");
-				int atualizaMatricula=leitor.nextInt();
+				int atualizaMatricula=-1;
+				try
+				{
+				atualizaMatricula=leitor.nextInt();
+				}catch (Exception e)
+				{
+					System.out.println("Erro!!");
+					leitor.next();
+				}
 				Funcionario atualizaFuncionario=n_Funcionario.procuraFuncionario(list_Funcionario, atualizaMatricula);
 				if(atualizaFuncionario!=null)
 				{
 					undo.push(new ArrayList<Funcionario>(list_Funcionario));
-					Funcionario novo_Funcionario=n_Funcionario.alterarFuncionario(list_Funcionario, atualizaFuncionario);
+					Funcionario novo_Funcionario=null;
+					try
+					{
+						novo_Funcionario=n_Funcionario.alterarFuncionario(list_Funcionario, atualizaFuncionario);
+					}catch(Exception e)
+					{
+						System.out.println("Erro!!");
+						novo_Funcionario=null;
+						menu=0;
+					}
 					if(novo_Funcionario!=null)
 					{
 						list_Funcionario.remove(atualizaFuncionario);
@@ -104,10 +134,10 @@ public class main {
 						aux2=false;
 					}
 					else
-						System.out.println("O funcionario nao foi encontrado!!\nErro!");
+						System.out.println("O funcionario nao foi encontrado!!!");
 				}
 				else
-					System.out.println("O funcionario nao foi encontrado!!\nErro!");
+					System.out.println("O funcionario nao foi encontrado!!!");
 				break;
 			case 5:
 				System.out.println("Digite o id do funcionario:");
@@ -116,7 +146,16 @@ public class main {
 				if(obj_VendedorAntigo!=null)
 				{
 					undo.push(new ArrayList<Funcionario>(list_Funcionario));
-					Funcionario obj_Vendedor = n_Funcionario.addVenda(obj_VendedorAntigo, folhaPagamento.getDate());
+					Funcionario obj_Vendedor;
+					try
+					{
+					obj_Vendedor= n_Funcionario.addVenda(obj_VendedorAntigo, folhaPagamento.getDate());
+					}catch(Exception e)
+					{
+						System.out.println("Erro!!");
+						obj_Vendedor=null;
+						menu=0;
+					}
 					if(obj_Vendedor!=null)
 					{
 						list_Funcionario.add(obj_Vendedor);
@@ -127,18 +166,34 @@ public class main {
 				}
 				break;
 			case 6:
+				Funcionario obj_VendedorPago;
 				System.out.println("Digite o id do funcionario:");
-				int identificador=leitor.nextInt();
-				Funcionario obj_VendedorPago=n_Funcionario.procuraFuncionario(list_Funcionario, identificador);
-				System.out.println(obj_VendedorPago.pagamento());
+				try
+				{
+					int identificador=leitor.nextInt();
+					obj_VendedorPago =n_Funcionario.procuraFuncionario(list_Funcionario, identificador);
+				}catch(Exception e)
+				{
+					System.out.println("Erro!!");
+					obj_VendedorPago=null;
+					menu=0;
+				}
+				if(obj_VendedorPago!=null)
+					System.out.println(obj_VendedorPago.pagamento());
+				else
+					System.out.println("O funcionario nao foi encontrado!!\nErro!");
 				break;
 			case 7:
+				Funcionario obj_funcionarioSindicato;
+				Funcionario obj_funFuncionarioSindicatonovo;
 				System.out.println("Digite o id do funcionario:");
-				int identificado=leitor.nextInt();
-				Funcionario obj_funcionarioSindicato=n_Funcionario.procuraFuncionario(list_Funcionario, identificado);
-				if(obj_funcionarioSindicato!=null)
+				try
 				{
-					Funcionario obj_funFuncionarioSindicatonovo=n_Funcionario.addTaxa(obj_funcionarioSindicato);
+					int identificado=leitor.nextInt();
+					obj_funcionarioSindicato=n_Funcionario.procuraFuncionario(list_Funcionario, identificado);
+					if(obj_funcionarioSindicato!=null)
+					{
+					obj_funFuncionarioSindicatonovo=n_Funcionario.addTaxa(obj_funcionarioSindicato);
 					if(obj_funFuncionarioSindicatonovo!=null)
 					{
 
@@ -153,41 +208,66 @@ public class main {
 				}
 				else
 					System.out.println("O funcionario nao foi encontrado!!\nErro!");
+				}catch(Exception e)
+				{
+					System.out.println("Erro!!");
+					menu=0;
+				}
 				break;
 			case 8:
-				System.out.println("Digite o id do funcionario:");
-				int ident=leitor.nextInt();
-				Funcionario obj_funcionarioPonto=n_Funcionario.procuraFuncionario(list_Funcionario, ident);
-				if(obj_funcionarioPonto!=null)
-				{
-					Funcionario obj_funcionarioPontoNovo=n_Funcionario.addPonto(obj_funcionarioPonto, folhaPagamento.getDate());
-					if(obj_funcionarioPontoNovo!=null)
+				Funcionario obj_funcionarioPontoNovo=null;
+				Funcionario obj_funcionarioPonto=null;
+				try{
+					System.out.println("Digite o id do funcionario:");
+					int ident=leitor.nextInt();
+					obj_funcionarioPonto=n_Funcionario.procuraFuncionario(list_Funcionario, ident);
+					if(obj_funcionarioPonto!=null)
 					{
-						undo.push(new ArrayList<Funcionario>(list_Funcionario));
-						list_Funcionario.add(obj_funcionarioPontoNovo);
-						list_Funcionario.remove(obj_funcionarioPonto);
-						aux=false;
-						aux2=false;
+						obj_funcionarioPontoNovo=n_Funcionario.addPonto(obj_funcionarioPonto, folhaPagamento.getDate());
+						if(obj_funcionarioPontoNovo!=null)
+						{
+							undo.push(new ArrayList<Funcionario>(list_Funcionario));
+							list_Funcionario.add(obj_funcionarioPontoNovo);
+							list_Funcionario.remove(obj_funcionarioPonto);
+							aux=false;
+							aux2=false;
+						}
+						else
+							System.out.println("O funcionario nao foi encontrado!!\nErro!");
 					}
 					else
 						System.out.println("O funcionario nao foi encontrado!!\nErro!");
+				}catch(Exception e)
+				{
+					System.out.println("Erro!!!");
+					menu=0;
 				}
-				else
-					System.out.println("O funcionario nao foi encontrado!!\nErro!");
 				break;
 			case 9:
 				undo.push(new ArrayList<Funcionario>(list_Funcionario));
 				System.out.println(folhaPagamento.geraPagamento(list_Funcionario));
-				list_Funcionario = new ArrayList<Funcionario>(folhaPagamento.limpaBoleto(list_Funcionario));
+				list_Funcionario = folhaPagamento.limpaBoleto(list_Funcionario);
 				list_Funcionario = new ArrayList<Funcionario>(folhaPagamento.baterPonto(list_Funcionario));
 				break;		
 			case 10:
-				redo.push(new ArrayList<Funcionario>(list_Funcionario));
-				list_Funcionario=new ArrayList<Funcionario>(undo.pop());
+				try
+				{
+					redo.push(new ArrayList<Funcionario>(list_Funcionario));
+					list_Funcionario=new ArrayList<Funcionario>(undo.pop());
+				}catch(Exception e)
+				{
+					System.out.println("Erro!!\nNao se pode realiza a acao!");
+				}
 				break;
 			case 11:
+				try
+				{
 				undo.push(new ArrayList<Funcionario>(list_Funcionario));
 				list_Funcionario=new ArrayList<Funcionario>(redo.pop());
+				}catch(Exception e)
+				{
+					System.out.println("Erro!!\nNao se pode realiza a acao!");
+				}
 				break;
 			}
 		}while(true);
