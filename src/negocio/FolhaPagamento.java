@@ -78,14 +78,14 @@ public class FolhaPagamento {
 	public String geraPagamento(ArrayList<Funcionario> list_funcionario)
 	{
 		String pagamento="\n";
-		for(Funcionario obj_funcionario : list_funcionario)
+		ArrayList<Funcionario> list_funcionario_aux = new ArrayList<Funcionario>(list_funcionario);
+		for(Funcionario obj_funcionario : list_funcionario_aux)
 		{
 			if(obj_funcionario instanceof Assalariado && ! (obj_funcionario instanceof Comissionado))
 			{
 				if(this.gegorianCal.get(this.gegorianCal.DATE)==this.gegorianCal.getMaximum(this.gegorianCal.DATE))
 				{
 					pagamento=pagamento.concat("\n\n"+obj_funcionario.pagamento());
-					obj_funcionario.list_pagamento.clear();
 				}
 			}
 			if(obj_funcionario instanceof Horista)
@@ -93,7 +93,6 @@ public class FolhaPagamento {
 				if(this.gegorianCal.get(this.gegorianCal.DAY_OF_WEEK)==this.gegorianCal.FRIDAY)
 				{
 					pagamento=pagamento.concat("\n\n"+obj_funcionario.pagamento());
-					obj_funcionario.list_cartao.clear();
 				}
 			}
 			if(obj_funcionario instanceof Comissionado)
@@ -103,7 +102,6 @@ public class FolhaPagamento {
 					if(((Comissionado) obj_funcionario).isPagamento())
 					{
 						pagamento=pagamento.concat("\n\n"+obj_funcionario.pagamento());
-						obj_funcionario.list_venda.clear();
 					}
 				}
 			}
@@ -111,4 +109,41 @@ public class FolhaPagamento {
 		return pagamento;
 	}
 
+	public ArrayList<Funcionario> limpaBoleto(ArrayList<Funcionario> list_funcionario)
+	{
+		ArrayList<Funcionario> list_funcionario_aux = new ArrayList<Funcionario>(list_funcionario);
+		for(Funcionario obj_funcionario : list_funcionario_aux)
+		{
+			if(obj_funcionario instanceof Assalariado && ! (obj_funcionario instanceof Comissionado))
+			{
+				int diaultil = 0;
+				if(this.gegorianCal.SUNDAY==this.gegorianCal.getMaximum(this.gegorianCal.DATE))
+					diaultil=-2;
+				if(this.gegorianCal.SATURDAY==this.gegorianCal.getMaximum(this.gegorianCal.DATE))
+					diaultil=-1;
+				if(this.gegorianCal.get(this.gegorianCal.DATE)+diaultil==this.gegorianCal.getMaximum(this.gegorianCal.DATE))
+				{
+					obj_funcionario.list_pagamento.clear();
+				}
+			}
+			if(obj_funcionario instanceof Horista)
+			{
+				if(this.gegorianCal.get(this.gegorianCal.DAY_OF_WEEK)==this.gegorianCal.FRIDAY)
+				{
+					obj_funcionario.list_cartao.clear();
+				}
+			}
+			if(obj_funcionario instanceof Comissionado)
+			{
+				if(this.gegorianCal.get(this.gegorianCal.DAY_OF_WEEK)==this.gegorianCal.FRIDAY)
+				{
+					if(((Comissionado) obj_funcionario).isPagamento())
+					{
+						obj_funcionario.list_venda.clear();
+					}
+				}
+			}
+		}
+		return list_funcionario_aux;
+	}
 }

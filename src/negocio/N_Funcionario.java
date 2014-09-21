@@ -133,6 +133,13 @@ public class N_Funcionario {
 	{
 		Sindicato obj_sindicato=null;
 		Scanner leitor = new Scanner(System.in);
+		Funcionario atualizaFuncionario2 = null;
+		if(obj_funcionario instanceof Assalariado && !(obj_funcionario instanceof Comissionado))
+			atualizaFuncionario2 = new Assalariado(obj_funcionario);
+		if(obj_funcionario instanceof Horista)
+			atualizaFuncionario2 = new Horista(obj_funcionario);
+		if(obj_funcionario instanceof Comissionado )
+			atualizaFuncionario2 =new Comissionado(obj_funcionario);
 		System.out.println("Escolha qual opcao deseja alterar:");
 		System.out.println("[1]-Nome");
 		System.out.println("[2]-Endereco");
@@ -149,13 +156,13 @@ public class N_Funcionario {
 				System.out.print("Digite o novo nome:");
 				leitor.nextLine();
 				String nome=leitor.nextLine();
-				obj_funcionario.setNome(nome);
+				atualizaFuncionario2.setNome(nome);
 				break;
 			case 2:
 				System.out.print("Digite o novo endereco:");
 				leitor.nextLine();
 				String endereco=leitor.nextLine();
-				obj_funcionario.setEnderenco(endereco);
+				atualizaFuncionario2.setEnderenco(endereco);
 				break;
 			case 3:
 				System.out.println("Tipo de pagamento:");
@@ -165,7 +172,7 @@ public class N_Funcionario {
 				System.out.println("[0]-Sair");
 				System.out.print("Opcao:");
 				int pagamento=leitor.nextInt();
-				obj_funcionario.setTipo_pagamento(pagamento-1);
+				atualizaFuncionario2.setTipo_pagamento(pagamento-1);
 				break;
 			case 4:
 				String sindicato;
@@ -181,8 +188,8 @@ public class N_Funcionario {
 					System.out.println("Digite a taxa do sindicato");
 					float taxa=leitor.nextFloat();
 					obj_sindicato= new Sindicato(this.procuraSindicato(list_Funcionario), taxa);
-					obj_funcionario.setObj_sindicato(obj_sindicato);
-					obj_funcionario.setSindicato(true);
+					atualizaFuncionario2.setObj_sindicato(obj_sindicato);
+					atualizaFuncionario2.setSindicato(true);
 				}
 				else
 					obj_funcionario.setSindicato(false);
@@ -192,7 +199,7 @@ public class N_Funcionario {
 				{
 					System.out.println("Digite a taxa do sindicato:");
 					float taxa=leitor.nextFloat();
-					obj_funcionario.getObj_sindicato().setTaxa(taxa);
+					atualizaFuncionario2.getObj_sindicato().setTaxa(taxa);
 				}
 				break;
 			case 7:
@@ -203,7 +210,7 @@ public class N_Funcionario {
 				System.out.println("[0]-Sair");
 				System.out.print("Opcao:");
 				int tipo=leitor.nextInt();
-				switch(tipo)
+			switch(tipo)
 				{
 					case 1:
 						System.out.println("Digite o salario do funcionario");
@@ -231,28 +238,49 @@ public class N_Funcionario {
 						break;
 				}
 		}
-		return obj_funcionario;
+		return atualizaFuncionario2;
 	}
 	public Funcionario addVenda(Funcionario obj_Funcionario, String data)
 	{
-		Scanner leitor= new Scanner(System.in);
+		Funcionario obj_retorno=null;
+		if( obj_Funcionario instanceof Assalariado && !(obj_Funcionario instanceof Comissionado))
+			obj_retorno = new Assalariado(obj_Funcionario);
+		if( obj_Funcionario instanceof Horista)
+			obj_retorno =new Horista(obj_Funcionario);
+		if( obj_Funcionario instanceof Comissionado )
+			obj_retorno =new Comissionado(obj_Funcionario);
+		Scanner leitor = new Scanner (System.in);
 		System.out.println("Digite o valor da venda:");
 		float venda=leitor.nextFloat();
 		Venda obj_venda=new Venda(venda, obj_Funcionario.getMatricula(), data);
-		obj_Funcionario.addVenda(obj_venda);
-		return obj_Funcionario;
+		obj_retorno.addVenda(obj_venda);
+		return obj_retorno;
 	}
 	public Funcionario addTaxa(Funcionario obj_Funcionario)
 	{
+		Funcionario obj_retorno=null;
+		if( obj_Funcionario instanceof Assalariado && !(obj_Funcionario instanceof Comissionado))
+			obj_retorno = new Assalariado(obj_Funcionario);
+		if( obj_Funcionario instanceof Horista)
+			obj_retorno =new Horista(obj_Funcionario);
+		if( obj_Funcionario instanceof Comissionado )
+			obj_retorno =new Comissionado(obj_Funcionario);
 		Scanner leitor= new Scanner(System.in);
 		System.out.println("Digite o valor da taxa a ser cobrada:");
 		float taxa=leitor.nextFloat();
 		Pagamento obj_taxa=new Pagamento( obj_Funcionario.getMatricula(), taxa);
-		obj_Funcionario.addTaxa(obj_taxa);
-		return obj_Funcionario;
+		obj_retorno.addTaxa(obj_taxa);
+		return obj_retorno;
 	}
 	public Funcionario addPonto(Funcionario obj_funcionario, String data)
 	{
+		Funcionario obj_retorno=null;
+		if( obj_funcionario instanceof Assalariado && !(obj_funcionario instanceof Comissionado))
+			obj_retorno = new Assalariado(obj_funcionario);
+		if( obj_funcionario instanceof Horista)
+			obj_retorno =new Horista(obj_funcionario);
+		if( obj_funcionario instanceof Comissionado )
+			obj_retorno =new Comissionado(obj_funcionario);
 		Scanner leitor= new Scanner(System.in);
 		System.out.println("Digite a hora inicial do ponto:");
 		int horaInicial=leitor.nextInt();
@@ -264,8 +292,8 @@ public class N_Funcionario {
 		int minutoFinal=leitor.nextInt();
 		CartaoPonto obj_cartao=new CartaoPonto(horaInicial, minutoInicial, horaFinal, minutoFinal);
 		obj_cartao.setDate(data);
-		obj_funcionario.addPonto(obj_cartao);
-		return obj_funcionario;
+		obj_retorno.addPonto(obj_cartao);
+		return obj_retorno;
 	}
 
 }
