@@ -41,6 +41,14 @@ public class FolhaPagamento {
 		return list_funcionario;
 	}
 	
+	public void retornaDia()
+	{
+		this.gegorianCal.add(this.gegorianCal.DATE, -1);
+	}
+	public void adicionaDia()
+	{
+		this.gegorianCal.add(this.gegorianCal.DATE, 1);
+	}
 	public String getDate()
 	{
 		String data = this.gegorianCal.get(this.gegorianCal.DATE)+"/"+(this.gegorianCal.get(this.gegorianCal.MONTH)+1)+"/"+this.gegorianCal.get(this.gegorianCal.YEAR);
@@ -133,6 +141,7 @@ public class FolhaPagamento {
 				{
 					list_funcionario_aux.set(i, new Horista(list_funcionario_aux.get(i)));
 					list_funcionario_aux.get(i).list_cartao.clear();
+					list_funcionario_aux.get(i).list_pagamento.clear();
 				}
 			}
 			if(list_funcionario.get(i) instanceof Comissionado)
@@ -143,6 +152,7 @@ public class FolhaPagamento {
 					{
 						list_funcionario_aux.set(i, new Comissionado(list_funcionario_aux.get(i)));
 						list_funcionario_aux.get(i).list_venda.clear();
+						list_funcionario_aux.get(i).list_pagamento.clear();
 					}
 				}
 			}

@@ -19,7 +19,10 @@ public class main {
 		list_Funcionario.add(new Horista("joao","antonio", 2, false, 2, 10));
 		Stack<ArrayList<Funcionario>> redo = new Stack<ArrayList<Funcionario>>();
 		Stack<ArrayList<Funcionario>> undo = new Stack<ArrayList<Funcionario>>();
+		Stack<Integer> undo_folha = new Stack<Integer>();
+		Stack<Integer> redo_folha = new Stack<Integer>();
 		int menu=0;
+		int auxInt=0;
 		boolean aux = false;
 		boolean aux2 = false;
 		boolean isContinue=true;
@@ -67,6 +70,7 @@ public class main {
 					System.out.println("Funcionario cadastrado com sucesso!");
 					aux=true;
 					aux2=false;
+					undo_folha.push(0);
 				}
 				else
 					System.out.println("O funcionario nao pode ser cadastrado!!!");
@@ -92,6 +96,7 @@ public class main {
 					System.out.println("Funcionario apagado com sucesso!");
 					aux=false;
 					aux2=true;
+					undo_folha.push(0);
 				}
 				else
 					System.out.println("O funcionario nao foi encontrado!!!");
@@ -133,8 +138,10 @@ public class main {
 					{
 						list_Funcionario.remove(atualizaFuncionario);
 						list_Funcionario.add(novo_Funcionario);
+						System.out.println("O funcionario atualizado com sucesso!!!");
 						aux=false;
 						aux2=false;
+						undo_folha.push(0);
 					}
 					else
 						System.out.println("O funcionario nao foi encontrado!!!");
@@ -163,8 +170,10 @@ public class main {
 					{
 						list_Funcionario.add(obj_Vendedor);
 						list_Funcionario.remove(obj_VendedorAntigo);
+						System.out.println("Venda lancada com sucesso!!!");
 						aux=false;
 						aux2=false;
+						undo_folha.push(0);
 					}
 				}
 				break;
@@ -203,8 +212,10 @@ public class main {
 						undo.push(new ArrayList<Funcionario>(list_Funcionario));
 						list_Funcionario.add(obj_funFuncionarioSindicatonovo);
 						list_Funcionario.remove(obj_funcionarioSindicato);
+						System.out.println("Taxa adicionada com sucesso!!!");
 						aux=false;
 						aux2=false;
+						undo_folha.push(0);
 					}
 					else
 						System.out.println("O funcionario nao foi encontrado!!\nErro!");
@@ -232,8 +243,10 @@ public class main {
 							undo.push(new ArrayList<Funcionario>(list_Funcionario));
 							list_Funcionario.add(obj_funcionarioPontoNovo);
 							list_Funcionario.remove(obj_funcionarioPonto);
+							System.out.println("Ponto registado com sucesso!!!");
 							aux=false;
 							aux2=false;
+							undo_folha.push(0);
 						}
 						else
 							System.out.println("O funcionario nao foi encontrado!!\nErro!");
@@ -247,14 +260,22 @@ public class main {
 				}
 				break;
 			case 9:
+				undo_folha.push(1);
 				undo.push(new ArrayList<Funcionario>(list_Funcionario));
 				System.out.println(folhaPagamento.geraPagamento(list_Funcionario));
 				list_Funcionario = new ArrayList<Funcionario>(folhaPagamento.limpaBoleto(list_Funcionario));
 				list_Funcionario = new ArrayList<Funcionario>(folhaPagamento.baterPonto(list_Funcionario));
 				break;		
 			case 10:
+				
 				try
 				{
+					int undo_folha_int=undo_folha.pop();
+					redo_folha.push(undo_folha_int);
+					if(undo_folha_int==1)
+					{
+						folhaPagamento.retornaDia();
+					}	
 					redo.push(new ArrayList<Funcionario>(list_Funcionario));
 					list_Funcionario=new ArrayList<Funcionario>(undo.pop());
 				}catch(Exception e)
@@ -265,8 +286,15 @@ public class main {
 			case 11:
 				try
 				{
-				undo.push(new ArrayList<Funcionario>(list_Funcionario));
-				list_Funcionario=new ArrayList<Funcionario>(redo.pop());
+					int redo_folha_int=redo_folha.pop();
+					undo_folha.push(redo_folha_int);
+					if(redo_folha_int==1)
+					{
+						folhaPagamento.adicionaDia();
+						System.out.println(folhaPagamento.geraPagamento(list_Funcionario));	
+					}
+					undo.push(new ArrayList<Funcionario>(list_Funcionario));
+					list_Funcionario=new ArrayList<Funcionario>(redo.pop());
 				}catch(Exception e)
 				{
 					System.out.println("Erro!!\nNao se pode realiza a acao!");
@@ -277,7 +305,5 @@ public class main {
 				break;
 			}
 		}while(isContinue);
-
 	}
-
 }
