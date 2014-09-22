@@ -112,9 +112,9 @@ public class FolhaPagamento {
 	public ArrayList<Funcionario> limpaBoleto(ArrayList<Funcionario> list_funcionario)
 	{
 		ArrayList<Funcionario> list_funcionario_aux = new ArrayList<Funcionario>(list_funcionario);
-		for(Funcionario obj_funcionario : list_funcionario_aux)
+		for(int i=0 ; i < list_funcionario_aux.size() ; i++)
 		{
-			if(obj_funcionario instanceof Assalariado && ! (obj_funcionario instanceof Comissionado))
+			if(list_funcionario_aux.get(i) instanceof Assalariado && ! (list_funcionario.get(i) instanceof Comissionado))
 			{
 				int diaultil = 0;
 				if(this.gegorianCal.SUNDAY==this.gegorianCal.getMaximum(this.gegorianCal.DATE))
@@ -123,23 +123,26 @@ public class FolhaPagamento {
 					diaultil=-1;
 				if(this.gegorianCal.get(this.gegorianCal.DATE)+diaultil==this.gegorianCal.getMaximum(this.gegorianCal.DATE))
 				{
-					obj_funcionario.list_pagamento.clear();
+					list_funcionario_aux.set(i, new Assalariado(list_funcionario_aux.get(i)));
+					list_funcionario_aux.get(i).list_pagamento.clear();
 				}
 			}
-			if(obj_funcionario instanceof Horista)
+			if(list_funcionario.get(i) instanceof Horista)
 			{
 				if(this.gegorianCal.get(this.gegorianCal.DAY_OF_WEEK)==this.gegorianCal.FRIDAY)
 				{
-					obj_funcionario.list_cartao.clear();
+					list_funcionario_aux.set(i, new Horista(list_funcionario_aux.get(i)));
+					list_funcionario_aux.get(i).list_cartao.clear();
 				}
 			}
-			if(obj_funcionario instanceof Comissionado)
+			if(list_funcionario.get(i) instanceof Comissionado)
 			{
 				if(this.gegorianCal.get(this.gegorianCal.DAY_OF_WEEK)==this.gegorianCal.FRIDAY)
 				{
-					if(((Comissionado) obj_funcionario).isPagamento())
+					if(((Comissionado) list_funcionario.get(i)).isPagamento())
 					{
-						obj_funcionario.list_venda.clear();
+						list_funcionario_aux.set(i, new Comissionado(list_funcionario_aux.get(i)));
+						list_funcionario_aux.get(i).list_venda.clear();
 					}
 				}
 			}

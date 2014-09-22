@@ -45,6 +45,7 @@ public class main {
 			{
 				System.out.println("Digite novamente!!\nErro!!");
 				leitor.next();
+				menu=0;
 			}
 			switch(menu)
 			{
@@ -248,7 +249,7 @@ public class main {
 			case 9:
 				undo.push(new ArrayList<Funcionario>(list_Funcionario));
 				System.out.println(folhaPagamento.geraPagamento(list_Funcionario));
-				list_Funcionario = folhaPagamento.limpaBoleto(list_Funcionario);
+				list_Funcionario = new ArrayList<Funcionario>(folhaPagamento.limpaBoleto(list_Funcionario));
 				list_Funcionario = new ArrayList<Funcionario>(folhaPagamento.baterPonto(list_Funcionario));
 				break;		
 			case 10:
